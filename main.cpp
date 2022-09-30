@@ -4,28 +4,32 @@
 
 using namespace std;
 
-int main()
-{
-    // Ввод данных
-    size_t number_count;
-    cerr << "Enter number_count";
-    cin >> number_count;
 
-    vector<double> numbers (number_count);
-    cerr << "Enter numbers:";
-    for (size_t i = 0; i < number_count; i++)
+
+
+vector<double>
+input_numbers(size_t count)
+{
+    cerr << "Enter_numbers:";
+
+    vector<double> result(count);
+
+    for (size_t i = 0; i < count; i++)
     {
-        cin >> numbers[i];
+        cin >> result[i];
     }
 
-    size_t bin_count;
-    cerr << "Enter bin_count";
-    cin >> bin_count;
+    return result;
+}
 
-    // Расчет гистограммы
-    vector<size_t> bins (bin_count, 0);
-    double min = numbers[0];
-    double max = numbers[0];
+
+
+
+void
+find_minmax(const vector<double>& numbers, double& min, double& max)
+{
+    min = numbers[0];
+    max + numbers[0];
 
     for (double number : numbers)
     {
@@ -40,34 +44,50 @@ int main()
         }
     }
 
+    return ;
+}
 
+
+
+
+vector<size_t>
+make_histogram(const vector<double>& numbers, size_t bin_count, size_t number_count, double min, double max)
+{
+    vector<size_t> bins_make (bin_count, 0);
 
     double bin_size = (max - min) / bin_count;
+
     for (size_t i = 0; i < number_count; i++)
     {
         bool found = false;
         for (size_t j = 0; j < (bin_count - 1) && !found; j++)
         {
-            auto lo = min + j * bin_size;
-            auto hi = min + (j + 1) * bin_size;
+            double lo = min + j * bin_size;
+            double hi = min + (j + 1) * bin_size;
 
             if ((lo <= numbers[i]) && (numbers[i] < hi))
             {
-                bins[j]++;
+                bins_make[j]++;
                 found = true;
             }
-
-
         }
 
         if(!found)
         {
-            bins[bin_count - 1]++;
+            bins_make[bin_count - 1]++;
         }
 
     }
 
-    // Вывод данных
+   return bins_make;
+}
+
+
+
+
+ show_histogram_text(const vector<size_t> bins)
+
+{
     const size_t SCREEN_WIDTH = 80;
     const size_t MAX_ASTERIX = SCREEN_WIDTH - 3 - 1;
 
@@ -80,17 +100,6 @@ int main()
         }
     }
 
-    string  draw;
-    cerr << "Enter draw:";
-    cin >> draw;
-
-    string axis;
-    cerr << "Enter axis:";
-    cin >> axis;
-
-    string evenly;
-    cerr << "Enter evenly:";
-    cin >> evenly;
 
 
     for (size_t bin : bins)
@@ -104,30 +113,44 @@ int main()
 
         if (bin < 100)
         {
-            cout << evenly;
+            cout << ' ';
         }
         if (bin < 10)
         {
-            cout << evenly;
+            cout << ' ';
         }
-        cout << bin << axis;
+        cout << bin << '|';
         for (size_t i =0; i < height; i++)
         {
-            cout << draw;
+            cout << '*';
         }
         cout << endl;
     }
 
+}
+
+
+int main()
+{
+
+    size_t number_count;
+    cerr << "Enter number_count";
+    cin >> number_count;
+
+    const auto numbers = input_numbers(number_count);
+
+    size_t bin_count;
+    cerr << "Enter bin_count";
+    cin >> bin_count;
+
+    double min, max;
+
+    find_minmax(numbers, min, max);
+
+    const auto bins = make_histogram(numbers, bin_count, number_count, min, max);
+
+    show_histogram_text(bins);
+
     return 0;
-
-    double S = 0;
-    double C = 0;
-    for (double number : numbers)
-    {
-        S = S + number;
-    }
-
-    C = S / number_count;
-
 
 }
