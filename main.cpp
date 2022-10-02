@@ -173,6 +173,30 @@ show_histogram_svg(const vector<size_t>& bins) {
     const auto BLOCK_WIDTH = 10;
 
     svg_begin(IMAGE_WIDTH, IMAGE_HEIGHT);
+
+    size_t max_bin = bins[0];
+    for (size_t bin : bins)
+    {
+        if (bin > max_bin)
+        {
+            max_bin = bin;
+        }
+    }
+    const bool scaling = max_bin* BLOCK_WIDTH > IMAGE_WIDTH - TEXT_WIDTH;
+    for (size_t bin : bins)
+    {
+        size_t height = bin;
+
+        if (scaling)
+        {
+            const double scaling_check = (double)(IMAGE_WIDTH - TEXT_WIDTH )/ (max_bin* BLOCK_WIDTH);
+            height = bin * scaling_check;
+        }
+        const double bin_width = BLOCK_WIDTH * height;
+    }
+
+
+
     svg_text(TEXT_LEFT, TEXT_BASELINE, to_string(bins[0]));
     svg_rect(TEXT_WIDTH, 0, bins[0] * BLOCK_WIDTH, BIN_HEIGHT, "blue", "#aaffaa");
 
