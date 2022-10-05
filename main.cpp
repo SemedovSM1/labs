@@ -154,6 +154,11 @@ main(int argc, char* argv[])
        curl_easy_setopt(curl, CURLOPT_URL, "https://example.com");
        res = curl_easy_perform(curl);
        curl_easy_cleanup(curl);
+
+         if (res != CURLE_OK) {
+            cerr << curl_easy_strerror(res);
+            exit(1);
+        }
       }
 
 
