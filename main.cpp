@@ -8,10 +8,7 @@
 using namespace std;
 
 
-struct Input {
-    vector<double> numbers;
-    size_t bin_count;
-};
+
 
 vector<double>
 input_numbers(istream& in, size_t count)
@@ -49,26 +46,26 @@ read_input(istream& in) {
 
 
 vector<size_t>
-make_histogram(const vector<double>& numbers, size_t bin_count)
+make_histogram(Input make)
 {
      double min, max;
 
-    find_minmax(numbers, min, max);
+    find_minmax(make.numbers, min, max);
 
 
-    vector<size_t> bins_make (bin_count, 0);
+    vector<size_t> bins_make (make.bin_count, 0);
 
-    double bin_size = (max - min) / bin_count;
+    double bin_size = (max - min) / make.bin_count;
 
-    for (size_t i = 0; i < numbers.size(); i++)
+    for (size_t i = 0; i < make.numbers.size(); i++)
     {
         bool found = false;
-        for (size_t j = 0; j < (bin_count - 1) && !found; j++)
+        for (size_t j = 0; j < (make.bin_count - 1) && !found; j++)
         {
             double lo = min + j * bin_size;
             double hi = min + (j + 1) * bin_size;
 
-            if ((lo <= numbers[i]) && (numbers[i] < hi))
+            if ((lo <= make.numbers[i]) && (make.numbers[i] < hi))
             {
                 bins_make[j]++;
                 found = true;
@@ -77,7 +74,7 @@ make_histogram(const vector<double>& numbers, size_t bin_count)
 
         if(!found)
         {
-            bins_make[bin_count - 1]++;
+            bins_make[make.bin_count - 1]++;
         }
 
     }
@@ -139,7 +136,7 @@ int main()
 
     const auto input = read_input(cin);
 
-    const auto bins = make_histogram(main.numbers, main.bin_count);
+    const auto bins = make_histogram(input);
 
     show_histogram_svg(bins);
 
