@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 
+#include <cstdio>
 
 using namespace std;
 
@@ -105,8 +106,19 @@ make_histogram(const vector<double>& numbers, size_t bin_count, size_t number_co
 
 
 
+
+
+
 int main()
 {
+
+    printf("n = %08x\n", 0x1234567);
+
+    const char* name = "Commander Shepard";
+    int year = 2154;
+    printf("%s was born in %d.\n", name, year);
+
+    return 0;
 
     size_t number_count;
     cerr << "Enter number_count";
