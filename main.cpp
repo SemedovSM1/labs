@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-
+#include <curl/curl.h>
 using namespace std;
 
 
@@ -143,6 +143,8 @@ make_histogram(Input make)
 
 int main()
 {
+    curl_global_init(CURL_GLOBAL_ALL);
+
     const auto input = read_input(cin, true);
 
     const auto bins = make_histogram(input);
