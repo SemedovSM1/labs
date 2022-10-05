@@ -32,10 +32,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="functions.cpp" />
-		<Unit filename="functions.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="functions_svg.cpp" />
 		<Unit filename="functions_svg.h">
 			<Option target="&lt;{~None~}&gt;" />
