@@ -3,6 +3,13 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include<cstdio>
+#include <sstream>
+#include <string>
+#include <windows.h>
+
+
+#include <curl/curl.h>
 
 #include <sstream>
 #include <string>
@@ -10,6 +17,7 @@
 
 #include <curl/curl.h>
 using namespace std;
+
 
 
 
@@ -155,6 +163,7 @@ write_data(void* items, size_t item_size, size_t item_count, void* ctx) {
 
     return data_size;
 }
+
 
 
 

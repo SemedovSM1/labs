@@ -36,7 +36,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="curl/include" />
 		</Compiler>
+
+		<Linker>
+			<Add library="curl/lib/libcurl.dll.a" />
+			<Add directory="curl/lib" />
+		</Linker>
+
 		<Unit filename="functions_svg.cpp" />
 		<Unit filename="functions_svg.h">
 			<Option target="&lt;{~None~}&gt;" />

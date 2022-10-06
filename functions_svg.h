@@ -6,6 +6,8 @@
 
 using namespace std;
 
+string make_info_text();
+
 void
 svg_begin(double width, double height);
 
