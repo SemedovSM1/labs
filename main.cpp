@@ -157,6 +157,9 @@ write_data(void* items, size_t item_size, size_t item_count, void* ctx) {
 }
 
 
+
+
+
 Input
 download(const string& address) {
     stringstream buffer;
@@ -175,6 +178,9 @@ download(const string& address) {
 
          if (res != CURLE_OK) {
             cerr << curl_easy_strerror(res);
+
+            printf("Downloaded %" CURL_FORMAT_CURL_OFF_T " bytes\n");
+
             exit(1);
         }
       }
